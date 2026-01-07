@@ -2,7 +2,8 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import Header from "@/components/header"
+// import Header from "@/components/header"
+import GlassmorphicNavbar from "@/components/glassmorphic-navbar"
 import Footer from "@/components/footer"
 import FloatingButtons from "@/components/floating-buttons"
 import ScrollToTop from "@/components/scroll-to-top"
@@ -29,10 +30,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={`${inter.className} overflow-x-hidden`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <ScrollToTop />
-          <Header />
+          {/* <Header /> */}
+          <GlassmorphicNavbar />
           <main className="w-full mx-auto">{children}</main>
           <Footer />
           <FloatingButtons />

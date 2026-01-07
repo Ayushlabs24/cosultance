@@ -1,24 +1,28 @@
-import HeroSection from "@/components/hero-section"
-import ImageCarousel from "@/components/image-carousel"
-import UpdatesSection from "@/components/updates-section"
-import FeaturedServices from "@/components/featured-services"
-import ServicesSection from "@/components/services-section"
-import StatsSection from "@/components/stats-section"
-import TestimonialsSection from "@/components/testimonials-section"
-import ContactSection from "@/components/contact-form"
+import dynamic from "next/dynamic"
+import HeroSectionNew from "@/components/hero-section-new"
+
+// Dynamically import heavy components below the fold
+const UpdatesSection = dynamic(() => import("@/components/updates-section"), { ssr: true })
+const FeaturedServices = dynamic(() => import("@/components/featured-services"), { ssr: true })
+const ServicesSection = dynamic(() => import("@/components/services-section"), { ssr: true })
+const StatsSection = dynamic(() => import("@/components/stats-section"), { ssr: true })
+const TestimonialsSection = dynamic(() => import("@/components/testimonials-section"), { ssr: true })
+const PricingSection = dynamic(() => import("@/components/pricing-section"), { ssr: true })
+const ContactSection = dynamic(() => import("@/components/contact-form"), { ssr: true })
 
 export default function Home() {
   return (
     <div className="min-h-screen">
-      <ImageCarousel />
-      {/* <HeroSection /> */}
+      <HeroSectionNew />
       <UpdatesSection />
       <FeaturedServices />
       <ServicesSection />
       <StatsSection />
       <TestimonialsSection />
-      <ContactSection/>
+      <PricingSection />
+      <ContactSection />
     </div>
   )
 }
+
 

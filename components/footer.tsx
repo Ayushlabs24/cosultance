@@ -124,12 +124,12 @@ const quickLinks = [
 ]
 
 const services = [
-  { label: "Company Registration", href: "/service/business-registration" },
-  { label: "GST Registration", href: "/service/gst-registration" },
-  { label: "Trademark Registration", href: "/service/trademark-registration" },
-  { label: "Income Tax Filing", href: "/service/income-tax-return" },
-  { label: "Legal Documentation", href: "/service/legal-documentation" },
-  { label: "Business Licenses", href: "/service/licenses" },
-  { label: "Compliance Services", href: "/service/tax-compliance" },
+  { label: "Ideation to IPO", href: "/ideation-to-ipo" },
+  { label: "Pvt Ltd Registration", href: "/pvt-ltd-registration" },
+  { label: "GST Registration", href: "/gst-registration" },
+  { label: "Check Trademark", href: "/trademark-registration" },
+  { label: "Income Tax Filing", href: "/income-tax-filing" },
+  { label: "Legal Drafting", href: "/legal-drafting" },
+  { label: "Business Valuation", href: "/valuation-services" },
 ]
 

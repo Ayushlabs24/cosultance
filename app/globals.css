@@ -53,10 +53,51 @@
   * {
     @apply border-border;
   }
+
+  /* Global Scaling: Default 16px, scales up on larger screens */
+  html {
+    font-size: 16px;
+  }
+
+  @media (min-width: 1440px) {
+    html {
+      font-size: 1.1111vw;
+      /* Scales with viewport width. 16px at 1440px, 21.3px at 1920px */
+    }
+  }
+
+  @media (min-width: 2560px) {
+    html {
+      font-size: 28px;
+      /* higher cap for ultra-wide */
+    }
+  }
+
   body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Override fixed-pixel container for fluid scaling on large screens */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 90vw !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+@media (min-width: 1920px) {
+  html {
+    font-size: 19px;
+    /* Cap scaling around 19px for consistency */
+  }
+}
+
+body {
+  @apply bg-background text-foreground;
+}
+
 
 /* Update the mega-menu CSS to prevent overlapping */
 .mega-menu {
@@ -69,7 +110,8 @@
   z-index: 50;
   padding: 1.5rem;
   border-top: 3px solid #007a96;
-  top: 100%; /* Ensure it appears below the menu item */
+  top: 100%;
+  /* Ensure it appears below the menu item */
   animation: fadeIn 0.3s ease-in-out;
 }
 
@@ -78,6 +120,7 @@
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -85,7 +128,8 @@
 }
 
 .menu-item {
-  position: static; /* This ensures the mega menu is positioned relative to the nav container */
+  position: static;
+  /* This ensures the mega menu is positioned relative to the nav container */
 }
 
 .menu-item:hover .mega-menu {
@@ -104,15 +148,9 @@
 }
 
 /* Add padding to the bottom of the body to account for the fixed form */
-body {
-  padding-bottom: 50px; /* Adjust based on the height of your form */
-  scroll-behavior: smooth;
-}
+/* Body padding removed */
 
 @media (max-width: 768px) {
-  body {
-    padding-bottom: 200px; /* More padding on mobile for the larger stacked form */
-  }
 
   /* Adjust font sizes for mobile */
   h1 {
@@ -150,12 +188,13 @@ button,
 
 /* Responsive floating buttons */
 .floating-buttons {
-  z-index: 39; /* Below the contact form but above other content */
+  z-index: 39;
+  /* Below the contact form but above other content */
 }
 
 @media (max-width: 640px) {
   .floating-buttons {
-    bottom: 220px; /* Adjust based on your contact form height */
+    bottom: 220px;
+    /* Adjust based on your contact form height */
   }
 }
-
