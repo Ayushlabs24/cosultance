@@ -50,48 +50,45 @@ export default function FeaturedServices() {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {featuredServices.map((service, index) => (
+          {featuredServices.slice(0, 3).map((service, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
               whileHover={{
-                scale: 1.05,
+                scale: 1.02,
                 transition: { duration: 0.2 },
               }}
               onHoverStart={() => setHoveredIndex(index)}
               onHoverEnd={() => setHoveredIndex(null)}
             >
-              <Link
-                href={service.href}
-                className="group bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 block h-full"
-              >
-                <div className="p-4 md:p-6 h-full flex flex-col">
+              <div className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 h-full flex flex-col">
+                {/* Image Section */}
+                <div className="relative h-48 md:h-56 w-full bg-gray-100">
                   <motion.div
-                    className="w-12 h-12 md:w-16 md:h-16 bg-primary/10 rounded-full flex items-center justify-center mb-3 md:mb-4 transition-all duration-300 group-hover:bg-primary/20"
-                    whileHover={{ rotate: 5 }}
-                    whileTap={{ scale: 0.95 }}
+                    className="w-full h-full relative"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+                    transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
                   >
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 0.3 + index * 0.1, duration: 0.5, type: "spring" }}
-                    >
-                     <Image
-                         src={service.image || `/placeholder.svg?height=40&width=40&text=${index + 1}`}
-                         alt={service.title}
-                         width={40}
-                         height={40}
-                         className="w-8 h-8 md:w-10 md:h-10 object-contain transition-transform duration-300 group-hover:scale-110"
-                        />
-                    </motion.div>
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      priority={index === 0}
+                    />
                   </motion.div>
+                </div>
+
+                {/* Content Section */}
+                <div className="p-6 flex-grow flex flex-col">
                   <motion.h3
-                    className="text-lg md:text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300"
+                    className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
@@ -99,50 +96,50 @@ export default function FeaturedServices() {
                     {service.title}
                   </motion.h3>
                   <motion.p
-                    className="text-sm md:text-base text-gray-600 mb-4 flex-grow"
+                    className="text-sm md:text-base text-gray-600 mb-6 flex-grow line-clamp-3"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
                   >
                     {service.description}
                   </motion.p>
-                  <div className="space-y-2">
+                  <Link href={service.href} className="w-full">
                     <Button
-                      className="bg-primary hover:bg-primary/90 text-white text-sm md:text-base w-full"
-                      // onClick={(e) => 
-                      //   //e.preventDefault()
-                      //   router.push(`/service/${service.href}`)
-                      // }
-                      onClick={(e) => {
-                        e.preventDefault();
-                        router.push(`/service/${service.href}`)
-                      }}
+                      className="bg-primary hover:bg-primary/90 text-white text-base w-full py-6 rounded-xl"
                     >
                       <motion.span
-                        className="flex items-center"
+                        className="flex items-center justify-center font-semibold"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.3, delay: 0.6 + index * 0.1 }}
                       >
-                        Get Started
-                        <ArrowRight className="ml-1 md:ml-2 h-3 w-3 md:h-4 md:w-4 transition-transform duration-300" />
+                        Learn More
+                        <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                       </motion.span>
                     </Button>
-                    <Button
-                      variant="outline"
-                      className="border-primary text-primary hover:bg-primary/10 text-sm md:text-base w-full"
-                      onClick={(e) => {
-                        e.preventDefault()
-                        router.push("/pricing")
-                      }}
-                    >
-                      View Pricing
-                    </Button>
-                  </div>
+                  </Link>
                 </div>
-              </Link>
+              </div>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* View All Services Button */}
+        <motion.div
+          className="text-center mt-12 md:mt-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <Link href="/services">
+            <Button
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-white px-10 py-7 text-lg rounded-2xl shadow-lg hover:shadow-primary/20 transition-all"
+            >
+              View All Services
+              <ArrowRight className="ml-2 h-6 w-6" />
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </section>
@@ -152,21 +149,21 @@ export default function FeaturedServices() {
 const featuredServices = [
   {
     title: "Company Registration",
-    description: "Register your business as Private Limited, LLP, OPC or Partnership Firm with expert guidance.",
+    description: "Register your business as Private Limited, LLP, OPC or Partnership Firm with expert guidance from professionals.",
     href: "/business-registration",
-    image: "/services/company-registration.webp", // ✅ your image path here
+    image: "/s1.png",
   },
   {
     title: "GST Registration",
-    description: "Get your business registered for GST and comply with tax regulations seamlessly.",
+    description: "Get your business registered for GST and comply with tax regulations seamlessly and start your business.",
     href: "/gst-registration",
-    image: "/services/gst-registration.webp",
+    image: "/s2.png",
   },
   {
     title: "Trademark Registration",
-    description: "Protect your brand identity with trademark registration and secure your business name.",
+    description: "Protect your brand identity with trademark registration and secure your business name across the globe.",
     href: "/trademark-registration",
-    image: "/services/trademark.webp",
+    image: "/s3.png",
   },
   {
     title: "Legal Documentation",

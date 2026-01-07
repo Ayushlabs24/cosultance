@@ -123,18 +123,14 @@ export default function GlassmorphicNavbar() {
       `}
     >
       {/* Left Section - Logo */}
-      <Link href="/" className="flex items-center gap-2 relative z-50 hover:opacity-90 transition-opacity">
+      <Link href="/" className="flex items-center relative z-50 hover:opacity-90 transition-opacity">
         <NextImage
-          src="/placeholder-logo.png"
-          alt="Bharat Comply Logo"
-          width={24} 
-          height={24}
-          className="object-contain"
+          src="/LOGO.jpeg"
+          alt="Logo"
+          width={50} 
+          height={50}
+          className="object-contain rounded-lg"
         />
-        <div className="flex items-baseline text-white">
-          <span className="text-xl tracking-tight font-medium">Bharat</span>
-          <span className="text-xl tracking-tight font-medium ml-1">Comply</span>
-        </div>
       </Link>
 
       {/* Center Nav Links (Desktop) */}

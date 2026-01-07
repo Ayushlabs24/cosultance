@@ -23,9 +23,9 @@ const steps = [
       "Complete Documentation Assistance",
     ],
     href: "/business-registration",
-    image: "/services/business-registration.webp", 
+    image: "/s1.png", 
     videoUrl: null,
-    posterUrl: "/services/business-registration.webp",
+    posterUrl: "/s1.png",
   },
   {
     id: "02",
@@ -36,9 +36,9 @@ const steps = [
       "Annual ROC Compliance & Filing",
     ],
     href: "/tax-compliance",
-    image: "/services/tax-compliance.webp",
+    image: "/s2.png",
     videoUrl: null,
-    posterUrl: "/services/tax-compliance.webp",
+    posterUrl: "/s2.png",
   },
   {
     id: "03",
@@ -49,9 +49,9 @@ const steps = [
       "Copyright & Patent Protection",
     ],
     href: "/trademark-ip",
-    image: "/services/trademark-ip.webp",
+    image: "/s3.png",
     videoUrl: null,
-    posterUrl: "/services/trademark-ip.webp",
+    posterUrl: "/s3.png",
   },
 ];
 

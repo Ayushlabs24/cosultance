@@ -14,21 +14,21 @@ interface Card {
 
 const cards: Card[] = [
   {
-    img: "/images/tan.webp",
+    img: "/c1 (1).png",
     subtitle: "Registration",
     title: "Company Registration & Compliance",
     tag: "Get Registered in 7 Days",
     gradient: "from-[#0F3642] to-[#09222B]", // Deep Teal/Blue
   },
   {
-    img: "/images/tax-filing.webp",
+    img: "/c1 (2).png",
     subtitle: "Taxation",
     title: "GST Filing & Income Tax Returns",
     tag: "Expert Tax Assistance",
     gradient: "from-[#1A3C34] to-[#0D1F1A]", // Deep Green
   },
   {
-    img: "/images/trademark-registration.webp",
+    img: "/c1 (3).png",
     subtitle: "Legal",
     title: "Trademark & IP Protection",
     tag: "Secure Your Brand",
@@ -64,12 +64,12 @@ export default function HeroSectionNew() {
             />
             
             <Image
-              src="/background-image.jpg" // Fallback/Texture overlay
+              src="/BackgroundImage.png"
               alt="Background"
               fill
               priority
               quality={90}
-              className="object-cover opacity-20 mixed-blend-overlay"
+              className="object-cover opacity-40 mix-blend-overlay"
               sizes="100vw"
             />
           
@@ -179,25 +179,24 @@ export default function HeroSectionNew() {
             </div>
       </div>
 
-      {/* Desktop/Tablet Layout: Dynamic Gradient Background */}
+      {/* Desktop/Tablet Layout: Background Image with Gradient Overlay */}
       <div 
         className="hidden lg:block relative w-full h-screen min-h-[700px] max-h-[1200px] overflow-hidden transition-all duration-1000"
       >
-        {/* Animated Background Layers */}
-        <AnimatePresence mode="popLayout">
-            <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.2, ease: "easeInOut" }}
-                className={`absolute inset-0 bg-gradient-to-br ${cards[currentIndex].gradient} z-0`}
-            />
-        </AnimatePresence>
+        {/* Main Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/BackgroundImage.png"
+            alt="Hero Background"
+            fill
+            priority
+            className="object-cover"
+          />
+          {/* Darker Gradient Overlay for readability */}
+          <div className={`absolute inset-0 bg-gradient-to-br transition-all duration-1000 opacity-90 ${cards[currentIndex].gradient}`}></div>
+          <div className="absolute inset-0 bg-black/40"></div>
+        </div>
 
-        {/* Abstract Gradient Overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-0"></div>
-        
         {/* Content Container */}
         <div className="relative z-10 h-full flex items-center justify-between px-12 lg:px-20 pt-32 lg:pt-40 2xl:pt-48">
           {/* LEFT TEXT CONTENT */}

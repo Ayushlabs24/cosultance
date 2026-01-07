@@ -95,7 +95,7 @@ export default function AnimatedServicesSection() {
 
           <div className="relative">
             {/* Process timeline line */}
-            <div className="absolute left-6 top-0 bottom-0 w-1 bg-primary/20 hidden md:block"></div>
+            <div className={`absolute left-6 top-0 bottom-0 w-1 hidden md:block transition-colors duration-500 ${processInView ? 'bg-primary/20' : 'bg-black/20'}`}></div>
 
             <div className="space-y-8">
               {registrationProcess.map((step, index) => (
@@ -108,7 +108,7 @@ export default function AnimatedServicesSection() {
                 >
                   <div className="flex-shrink-0 mr-6 relative">
                     <motion.div
-                      className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white font-bold z-10 relative"
+                      className={`flex items-center justify-center w-12 h-12 rounded-full font-bold z-10 relative transition-colors duration-500 ${processInView ? 'bg-primary text-white' : 'bg-black text-white'}`}
                       initial={{ scale: 0 }}
                       animate={processInView ? { scale: 1 } : { scale: 0 }}
                       transition={{ duration: 0.3, delay: index * 0.15 + 0.2, type: "spring" }}
@@ -121,7 +121,7 @@ export default function AnimatedServicesSection() {
                     whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
                     transition={{ duration: 0.2 }}
                   >
-                    <h4 className="font-bold text-xl mb-2">{step.title}</h4>
+                    <h4 className={`font-bold text-xl mb-2 transition-colors duration-500 ${processInView ? 'text-gray-900' : 'text-black'}`}>{step.title}</h4>
                     <p className="text-gray-700 mb-4">{step.description}</p>
                     {step.details && (
                       <ul className="space-y-2">
