@@ -3,10 +3,10 @@ import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "luc
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white pt-12 pb-12">
+    <footer className="bg-gray-900 text-white pt-8 pb-8">
       <div className="w-full px-4 md:px-8 lg:px-12">
         {/* Main footer content */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Company info */}
           <div>
             <h3 className="text-lg font-semibold mb-4 border-b border-gray-700 pb-2">About Us</h3>
@@ -34,28 +34,11 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4 border-b border-gray-700 pb-2">Quick Links</h3>
-            <ul className="space-y-2 text-sm">
-              {quickLinks.map((link, index) => (
-                <li key={index}>
-                  <Link
-                    href={link.href}
-                    className="text-gray-400 hover:text-white hover:underline transition-colors duration-200 flex items-center"
-                  >
-                    <span className="mr-2">›</span> {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Services */}
           <div>
             <h3 className="text-lg font-semibold mb-4 border-b border-gray-700 pb-2">Our Services</h3>
             <ul className="space-y-2 text-sm">
-              {services.map((service, index) => (
+              {services.slice(0, 4).map((service, index) => (
                 <li key={index}>
                   <Link
                     href={service.href}
@@ -89,7 +72,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom footer */}
-        <div className="mt-10 pt-6 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+        <div className="mt-8 pt-6 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-xs mb-4 md:mb-0 text-center md:text-left">
             &copy; {new Date().getFullYear()} Bharat Comply. All rights reserved.
           </p>
@@ -112,16 +95,6 @@ export default function Footer() {
     </footer>
   )
 }
-
-const quickLinks = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
-  { label: "FAQs", href: "/faqs" },
-]
 
 const services = [
   { label: "Ideation to IPO", href: "/ideation-to-ipo" },

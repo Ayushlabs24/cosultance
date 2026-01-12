@@ -50,30 +50,22 @@ export default function HeroSectionNew() {
     (index + cards.length) % cards.length;
 
   return (
-    <section className="bg-white w-full flex justify-center lg:px-6 2xl:px-0">
+    <section className="bg-black w-full flex justify-center overflow-hidden">
       {/* Mobile Layout: Full screen, no white borders */}
       <div className="md:hidden w-full min-h-screen relative overflow-hidden">
           
-             {/* Mobile Dynamic Background */}
-             <motion.div
-              key={`mobile-bg-${currentIndex}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
-              className={`absolute inset-0 bg-gradient-to-br ${cards[currentIndex].gradient}`}
-            />
-            
-            <Image
+             <Image
               src="/BackgroundImage.png"
               alt="Background"
               fill
               priority
               quality={90}
-              className="object-cover opacity-40 mix-blend-overlay"
+              className="object-cover"
               sizes="100vw"
             />
           
-            <div className="absolute inset-0 bg-black/20"></div>
+            {/* Dark fade for mobile at bottom */}
+            <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent"></div>
             
            
             <div className="relative z-10 flex flex-col items-center px-6 pt-24 pb-12 h-full justify-center min-h-screen">
@@ -81,7 +73,7 @@ export default function HeroSectionNew() {
               <h1 
                 className="font-manrope font-bold text-[2.5rem] leading-[1.2] tracking-[-0.04em] text-white text-center w-full mb-6"
               >
-                Expert CA Services for Your Business Growth
+                Expert Services for Your Business Growth
               </h1>
               
           
@@ -97,18 +89,6 @@ export default function HeroSectionNew() {
               </button>
               
               
-              <div className="flex items-center gap-2 mb-12">
-                <Image
-                  src="/placeholder-logo.png"
-                  alt="Logo"
-                  width={14}
-                  height={14}
-                  className="shrink-0"
-                />
-                <p className="font-manrope font-medium text-sm leading-[20px] text-gray-200 text-center">
-                  Book a free discovery call
-                </p>
-              </div>
 
               
               <div className="relative w-full h-[380px] flex items-center justify-center overflow-visible">
@@ -192,9 +172,8 @@ export default function HeroSectionNew() {
             priority
             className="object-cover"
           />
-          {/* Darker Gradient Overlay for readability */}
-          <div className={`absolute inset-0 bg-gradient-to-br transition-all duration-1000 opacity-90 ${cards[currentIndex].gradient}`}></div>
-          <div className="absolute inset-0 bg-black/40"></div>
+          {/* Bottom Fade to blend with content/footer */}
+          <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent"></div>
         </div>
 
         {/* Content Container */}
@@ -203,7 +182,7 @@ export default function HeroSectionNew() {
           <div className="flex-1 max-w-[40rem] lg:max-w-[44rem] space-y-6 lg:space-y-8">
             {/* Main Heading */}
             <h1 className="text-[3rem] lg:text-[4rem] 2xl:text-[5rem] font-manrope font-bold leading-[1.125] tracking-[-0.02em] text-white">
-              Expert CA Services for <br /> Your Business Growth
+              Expert Services for <br /> Your Business Growth
             </h1>
             
           
@@ -220,18 +199,6 @@ export default function HeroSectionNew() {
                 Get Expert Consultation
               </button>
               
-              <div className="flex items-center gap-3 max-w-[18rem]">
-                <Image
-                  src="/placeholder-logo.png"
-                  alt="Logo"
-                  width={14}
-                  height={14}
-                  className="shrink-0"
-                />
-                <p className="font-manrope font-medium text-xs lg:text-sm leading-[1.4] text-gray-300">
-                  Book a free discovery call
-                </p>
-              </div>
             </div>
           </div>
 

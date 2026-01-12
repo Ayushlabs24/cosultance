@@ -146,23 +146,19 @@ export default function LoginPage() {
 // };
 
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-center lg:justify-start lg:pl-[12%] overflow-hidden">
-      {/* Background Image with Gradient Overlay */}
+    <div className="relative min-h-screen w-full flex items-start justify-center lg:justify-start lg:pl-[12%] pt-28 md:pt-36 pb-24 md:pb-32 overflow-hidden">
+      {/* Background Image Container */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/BackgroundImage.png"
+          src="/lOGINbACK.png"
           alt="Login Background"
           fill
           priority
           className="object-cover object-right lg:object-[80%_center]"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0F3642] via-[#09222B] to-black opacity-90"></div>
-        <div className="absolute inset-0 bg-black/40"></div>
+        {/* Bottom Fade to blend with footer */}
+        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
       </div>
-
-      {/* Decorative Circles (optional, for that modern look) */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#0EA5E9]/20 blur-[120px] rounded-full pointer-events-none"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#2D1B4E]/30 blur-[120px] rounded-full pointer-events-none"></div>
 
       {/* Glassmorphic Form Container */}
       <motion.div 
@@ -176,17 +172,6 @@ export default function LoginPage() {
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
           
           <div className="text-center mb-10">
-            <Link href="/" className="inline-block mb-6">
-              <div className="bg-white/10 p-2 rounded-2xl border border-white/20 backdrop-blur-md">
-                <Image
-                  src="/LOGO.jpeg"
-                  alt="Logo"
-                  width={60}
-                  height={60}
-                  className="rounded-xl"
-                />
-              </div>
-            </Link>
             <h1 className="text-3xl font-bold text-white mb-3 tracking-tight">Welcome Back</h1>
             <p className="text-gray-300 font-medium">Log in to your account</p>
           </div>
