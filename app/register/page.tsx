@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Eye, EyeOff, Mail, Lock, User, Phone } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import Image from "next/image"
 
 
 // Update the image section to use the slider
@@ -154,127 +156,172 @@ const handleSubmit = async (e: React.FormEvent) => {
 
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
-      {/* Left side - Image Slider */}
-      <div className="hidden md:block md:w-1/2">
-        <AuthImageSlider />
+    <div className="relative min-h-screen w-full flex items-center justify-center lg:justify-start lg:pl-[12%] overflow-hidden py-12">
+      {/* Background Image with Gradient Overlay */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/BackgroundImage.png"
+          alt="Register Background"
+          fill
+          priority
+          className="object-cover object-right lg:object-[80%_center]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1A3C34] via-[#0D1F1A] to-black opacity-90"></div>
+        <div className="absolute inset-0 bg-black/40"></div>
       </div>
 
-      {/* Right side - Form */}
-      <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-6 md:p-12">
-        <div className="w-full max-w-md">
+      {/* Decorative Circles */}
+      <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#0EA5E9]/20 blur-[120px] rounded-full pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#1A3C34]/30 blur-[120px] rounded-full pointer-events-none"></div>
+
+      {/* Glassmorphic Form Container */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-10 w-full max-w-xl p-6 md:p-8 mx-4"
+      >
+        <div className="bg-white/10 backdrop-blur-[20px] border border-white/20 rounded-[2.5rem] shadow-2xl p-8 md:p-10 overflow-hidden relative">
+          {/* Subtle Inner Glow */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+          
           <div className="text-center mb-8">
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Create an Account</h1>
-            <p className="text-gray-600">Sign up to get started with our services</p>
+            <Link href="/" className="inline-block mb-4">
+              <div className="bg-white/10 p-2 rounded-2xl border border-white/20 backdrop-blur-md">
+                <Image
+                  src="/LOGO.jpeg"
+                  alt="Logo"
+                  width={50}
+                  height={50}
+                  className="rounded-xl"
+                />
+              </div>
+            </Link>
+            <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">Create an Account</h1>
+            <p className="text-gray-300 font-medium">Join us and start your journey</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-1">
-              <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
-                Full Name
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User className="h-5 w-5 text-gray-400" />
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="space-y-2">
+                <label htmlFor="fullName" className="block text-sm font-semibold text-gray-200 ml-1">
+                  Full Name
+                </label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-[#0EA5E9]">
+                    <User className="h-5 w-5 text-gray-400 group-focus-within:text-[#0EA5E9]" />
+                  </div>
+                  <Input
+                    id="fullName"
+                    name="fullName"
+                    type="text"
+                    autoComplete="name"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    className={`
+                      h-12 pl-12 bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-xl
+                      focus:ring-[#0EA5E9] focus:border-[#0EA5E9] transition-all
+                      ${errors.fullName ? "border-red-500/50 bg-red-500/5" : ""}
+                    `}
+                    placeholder="John Doe"
+                  />
                 </div>
-                <Input
-                  id="fullName"
-                  name="fullName"
-                  type="text"
-                  autoComplete="name"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  className={`pl-10 ${errors.fullName ? "border-red-500" : ""}`}
-                  placeholder="Enter your full name"
-                />
+                {errors.fullName && <p className="text-red-400 text-xs mt-1 ml-1">{errors.fullName}</p>}
               </div>
-              {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>}
+
+              <div className="space-y-2">
+                <label htmlFor="email" className="block text-sm font-semibold text-gray-200 ml-1">
+                  Email Address
+                </label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-[#0EA5E9]">
+                    <Mail className="h-5 w-5 text-gray-400 group-focus-within:text-[#0EA5E9]" />
+                  </div>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={`
+                      h-12 pl-12 bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-xl
+                      focus:ring-[#0EA5E9] focus:border-[#0EA5E9] transition-all
+                      ${errors.email ? "border-red-500/50 bg-red-500/5" : ""}
+                    `}
+                    placeholder="john@example.com"
+                  />
+                </div>
+                {errors.email && <p className="text-red-400 text-xs mt-1 ml-1">{errors.email}</p>}
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="phone" className="block text-sm font-semibold text-gray-200 ml-1">
+                  Phone Number
+                </label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-[#0EA5E9]">
+                    <Phone className="h-5 w-5 text-gray-400 group-focus-within:text-[#0EA5E9]" />
+                  </div>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    autoComplete="tel"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className={`
+                      h-12 pl-12 bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-xl
+                      focus:ring-[#0EA5E9] focus:border-[#0EA5E9] transition-all
+                      ${errors.phone ? "border-red-500/50 bg-red-500/5" : ""}
+                    `}
+                    placeholder="9999999999"
+                  />
+                </div>
+                {errors.phone && <p className="text-red-400 text-xs mt-1 ml-1">{errors.phone}</p>}
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="password" className="block text-sm font-semibold text-gray-200 ml-1">
+                  Password
+                </label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-[#0EA5E9]">
+                    <Lock className="h-5 w-5 text-gray-400 group-focus-within:text-[#0EA5E9]" />
+                  </div>
+                  <Input
+                    id="password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    autoComplete="new-password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    className={`
+                      h-12 pl-12 bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-xl
+                      focus:ring-[#0EA5E9] focus:border-[#0EA5E9] transition-all
+                      ${errors.password ? "border-red-500/50 bg-red-500/5" : ""}
+                    `}
+                    placeholder="••••••••"
+                  />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-white transition-colors"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
+                {errors.password && <p className="text-red-400 text-xs mt-1 ml-1">{errors.password}</p>}
+              </div>
             </div>
 
-            <div className="space-y-1">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email Address
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-gray-400" />
-                </div>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={`pl-10 ${errors.email ? "border-red-500" : ""}`}
-                  placeholder="Enter your email"
-                />
-              </div>
-              {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
-            </div>
-
-            <div className="space-y-1">
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                Phone Number
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Phone className="h-5 w-5 text-gray-400" />
-                </div>
-                <Input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  autoComplete="tel"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className={`pl-10 ${errors.phone ? "border-red-500" : ""}`}
-                  placeholder="Enter your phone number"
-                />
-              </div>
-              {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
-            </div>
-
-            <div className="space-y-1">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-gray-400" />
-                </div>
-                <Input
-                  id="password"
-                  name="password"
-                  type={showPassword ? "text" : "password"}
-                  autoComplete="new-password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  className={`pl-10 ${errors.password ? "border-red-500" : ""}`}
-                  placeholder="Create a password"
-                />
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400" />
-                  ) : (
-                    <Eye className="h-5 w-5 text-gray-400" />
-                  )}
-                </button>
-              </div>
-              {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
-            </div>
-
-            <div className="space-y-1">
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+            <div className="space-y-2">
+              <label htmlFor="confirmPassword" className="block text-sm font-semibold text-gray-200 ml-1">
                 Confirm Password
               </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-gray-400" />
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-[#0EA5E9]">
+                  <Lock className="h-5 w-5 text-gray-400 group-focus-within:text-[#0EA5E9]" />
                 </div>
                 <Input
                   id="confirmPassword"
@@ -283,14 +330,18 @@ const handleSubmit = async (e: React.FormEvent) => {
                   autoComplete="new-password"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className={`pl-10 ${errors.confirmPassword ? "border-red-500" : ""}`}
-                  placeholder="Confirm your password"
+                  className={`
+                    h-12 pl-12 bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-xl
+                    focus:ring-[#0EA5E9] focus:border-[#0EA5E9] transition-all
+                    ${errors.confirmPassword ? "border-red-500/50 bg-red-500/5" : ""}
+                  `}
+                  placeholder="••••••••"
                 />
               </div>
-              {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>}
+              {errors.confirmPassword && <p className="text-red-400 text-xs mt-1 ml-1">{errors.confirmPassword}</p>}
             </div>
 
-            <div className="flex items-start">
+            <div className="flex items-start ml-1 py-1">
               <div className="flex items-center h-5">
                 <input
                   id="agreeTerms"
@@ -298,86 +349,40 @@ const handleSubmit = async (e: React.FormEvent) => {
                   type="checkbox"
                   checked={formData.agreeTerms}
                   onChange={handleChange}
-                  className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
+                  className="h-4 w-4 bg-white/5 border-white/20 text-[#0EA5E9] focus:ring-[#0EA5E9] rounded cursor-pointer"
                 />
               </div>
-              <div className="ml-3 text-sm">
-                <label htmlFor="agreeTerms" className="font-medium text-gray-700">
+              <div className="ml-3 text-xs md:text-sm">
+                <label htmlFor="agreeTerms" className="font-medium text-gray-300">
                   I agree to the{" "}
-                  <Link href="/terms" className="text-primary hover:text-primary/80">
-                    Terms of Service
+                  <Link href="/terms" className="text-[#0EA5E9] hover:underline">
+                    Terms
                   </Link>{" "}
                   and{" "}
-                  <Link href="/privacy" className="text-primary hover:text-primary/80">
+                  <Link href="/privacy" className="text-[#0EA5E9] hover:underline">
                     Privacy Policy
                   </Link>
                 </label>
-                {errors.agreeTerms && <p className="text-red-500 text-xs mt-1">{errors.agreeTerms}</p>}
+                {errors.agreeTerms && <p className="text-red-400 text-xs mt-1">{errors.agreeTerms}</p>}
               </div>
             </div>
 
-            <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
+            <Button 
+              type="submit" 
+              className="w-full h-14 bg-[#0EA5E9] hover:bg-[#0284c7] text-white font-bold text-lg rounded-2xl shadow-lg shadow-[#0EA5E9]/20 transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99]"
+            >
               Create Account
             </Button>
           </form>
 
-          {/* <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">Or sign up with</span>
-              </div>
-            </div>
-
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              <button
-                type="button"
-                className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-              >
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                    fill="#4285F4"
-                  />
-                  <path
-                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                    fill="#34A853"
-                  />
-                  <path
-                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-                    fill="#FBBC05"
-                  />
-                  <path
-                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                    fill="#EA4335"
-                  />
-                </svg>
-              </button>
-              <button
-                type="button"
-                className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-              >
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                  <path
-                    fillRule="evenodd"
-                    d="M10 0C4.477 0 0 4.477 0 10c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0110 4.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C17.14 18.163 20 14.418 20 10c0-5.523-4.477-10-10-10z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div> */}
-
-          <p className="mt-8 text-center text-sm text-gray-600">
+          <p className="mt-8 text-center text-gray-300 font-medium">
             Already have an account?{" "}
-            <Link href="/login" className="font-medium text-primary hover:text-primary/80">
+            <Link href="/login" className="text-[#0EA5E9] font-bold hover:text-[#38bdf8] transition-colors">
               Sign in
             </Link>
           </p>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

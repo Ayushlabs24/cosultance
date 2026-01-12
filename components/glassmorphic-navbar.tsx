@@ -109,7 +109,7 @@ export default function GlassmorphicNavbar() {
   return (
     <nav
       className={`
-        fixed top-4 md:top-6 left-1/2 -translate-x-1/2
+        absolute top-4 md:top-6 left-1/2 -translate-x-1/2
         z-[9999]
         flex items-center justify-between
         rounded-[3.75rem]
@@ -197,8 +197,8 @@ export default function GlassmorphicNavbar() {
       </div>
 
      
-      <button
-        onClick={handleGetInTouch}
+      <Link
+        href="/login"
         className="
           hidden lg:block
           bg-white text-black
@@ -214,8 +214,8 @@ export default function GlassmorphicNavbar() {
           ml-8
         "
       >
-        Get in touch
-      </button>
+        Login/Signup
+      </Link>
 
       {/* Mobile Menu Button */}
       <div className="lg:hidden flex items-center z-50">
@@ -296,8 +296,8 @@ export default function GlassmorphicNavbar() {
                     </div>
                 ))}
 
-                <button
-                    onClick={handleGetInTouch}
+                <Link
+                    href="/login"
                     className="
                         mt-6 w-full
                         bg-white text-black
@@ -305,10 +305,11 @@ export default function GlassmorphicNavbar() {
                         font-bold text-lg
                         hover:bg-gray-200
                         transition-all
+                        text-center
                     "
                 >
-                    Get in touch
-                </button>
+                    Login/Signup
+                </Link>
             </div>
           </motion.div>
         )}
