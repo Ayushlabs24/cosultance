@@ -3,9 +3,10 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Check, Clock, FileText, HelpCircle, Star, ChevronRight, ArrowRight, ShieldCheck, Zap, ArrowLeft } from "lucide-react"
+import { Check, Clock, FileText, HelpCircle, Star, ChevronRight, ArrowRight, ShieldCheck, Zap, ArrowLeft, Minus, Plus } from "lucide-react"
 import ServiceForm from "@/components/service-form"
 import { motion } from "framer-motion"
+import PricingSection from "@/components/pricing-section"
 
 // Removed PricingPlan interface
 
@@ -193,6 +194,11 @@ export default function ServicePageLayout({
                    </div>
                )}
 
+               {/* Pricing Section */}
+               <div className="-mx-4 md:-mx-8 lg:mx-0">
+                  <PricingSection />
+               </div>
+
                {/* FAQ */}
                 <section>
                     <h2 className="text-3xl font-bold text-gray-900 mb-8">FAQs</h2>
@@ -285,6 +291,11 @@ export default function ServicePageLayout({
                                  ))}
                              </div>
                              
+                             {/* Pricing Section */}
+                             <div className="-mx-8 lg:-mx-12 xl:mx-0 mb-12">
+                                <PricingSection />
+                             </div>
+
                              {faqs.length > 0 && (
                                 <div className="mt-16">
                                     <h3 className="text-2xl font-bold mb-6">Common Questions</h3>
@@ -361,6 +372,32 @@ export default function ServicePageLayout({
                                 ))}
                             </div>
                          </div>
+
+                         {/* Pricing Section */}
+                         <div className="mt-12 -mx-6 lg:mx-0">
+                            <PricingSection />
+                         </div>
+
+                         {/* FAQ Section for Variant 3 */}
+                         {faqs.length > 0 && (
+                             <div className="mt-12 bg-white p-8 rounded-2xl shadow-xl shadow-indigo-900/5">
+                                 <h3 className="text-2xl font-bold text-slate-800 mb-6">Common Questions</h3>
+                                 <div className="space-y-4">
+                                     {faqs.map((faq, i) => (
+                                         <details key={i} className="group border-b border-indigo-100 last:border-0 pb-4 mb-4 last:mb-0 last:pb-0">
+                                             <summary className="flex items-center justify-between cursor-pointer font-bold text-slate-700 marker:content-none hover:text-indigo-600 transition-colors">
+                                                 {faq.question}
+                                                 <Plus className="h-5 w-5 text-indigo-400 group-open:hidden" />
+                                                 <Minus className="h-5 w-5 text-indigo-600 hidden group-open:block" />
+                                             </summary>
+                                             <div className="mt-3 text-slate-600 leading-relaxed pl-2 border-l-2 border-indigo-200">
+                                                 {faq.answer}
+                                             </div>
+                                         </details>
+                                     ))}
+                                 </div>
+                             </div>
+                         )}
                      </div>
                      <div className="lg:col-span-4">
                          <div className="sticky top-24">
@@ -447,9 +484,28 @@ export default function ServicePageLayout({
                                          <p className="text-gray-500 max-w-md">{step.description}</p>
                                      </div>
                                  ))}
-                             </div>
+                              </div>
+                          </div>
+
+                         {/* Pricing Section */}
+                         <div className="-mx-4 md:-mx-12 lg:mx-0 mb-12 mt-16">
+                            <PricingSection />
                          </div>
-                    </div>
+
+                         {faqs.length > 0 && (
+                            <div>
+                                <h3 className="font-serif text-3xl mb-10">Common Questions</h3>
+                                <div className="space-y-6">
+                                    {faqs.map((faq, i) => (
+                                        <div key={i} className="border-b border-gray-200 pb-6">
+                                            <h5 className="font-bold text-lg mb-2 text-gray-900">{faq.question}</h5>
+                                            <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                         )}
+                     </div>
                 </div>
             </div>
         </div>
@@ -512,6 +568,31 @@ export default function ServicePageLayout({
                              ))}
                          </div>
                      </div>
+
+                    {/* Pricing Section */}
+                    <div className="mb-20 -mx-4 md:-mx-8 lg:mx-0">
+                        <PricingSection />
+                    </div>
+
+                    {/* FAQ Section */}
+                    {faqs && faqs.length > 0 && (
+                        <div className="mb-20">
+                             <h3 className="text-3xl font-bold text-center mb-12 uppercase tracking-wide">Common Questions</h3>
+                             <div className="space-y-4 max-w-3xl mx-auto">
+                                 {faqs.map((faq, i) => (
+                                     <details key={i} className="group bg-gray-50 rounded-none border-l-4 border-black p-6 open:bg-gray-100 transition-all">
+                                         <summary className="flex items-center justify-between cursor-pointer font-bold text-lg text-gray-900 marker:content-none">
+                                             {faq.question}
+                                             <ChevronRight className="h-5 w-5 group-open:rotate-90 transition-transform" />
+                                         </summary>
+                                         <div className="mt-4 text-gray-600 leading-relaxed">
+                                             {faq.answer}
+                                         </div>
+                                     </details>
+                                 ))}
+                             </div>
+                        </div>
+                    )}
 
                      <div className="max-w-xl mx-auto">
                          <h3 className="text-center font-bold text-2xl mb-8">Get Expert Assistance</h3>

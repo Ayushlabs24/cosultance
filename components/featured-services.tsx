@@ -55,7 +55,7 @@ export default function FeaturedServices() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {featuredServices.slice(0, 3).map((service, index) => (
+          {featuredServices.slice(0, 6).map((service, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
@@ -150,7 +150,7 @@ const featuredServices = [
   {
     title: "Company Registration",
     description: "Register your business as Private Limited, LLP, OPC or Partnership Firm with expert guidance from professionals.",
-    href: "/business-registration",
+    href: "/pvt-ltd-registration",
     image: "/s1.png",
   },
   {
@@ -168,7 +168,19 @@ const featuredServices = [
   {
     title: "Legal Documentation",
     description: "Get professionally drafted legal documents tailored to your business needs.",
-    href: "/legal-documentation",
-    image: "/services/legal-docs.webp",
+    href: "/legal-drafting",
+    image: "/c1 (1).png",
+  },
+  {
+    title: "Income Tax Filing",
+    description: "Expert assistance for filing your Income Tax Returns and ensuring compliance with the latest tax laws.",
+    href: "/income-tax-filing",
+    image: "/c1 (2).png",
+  },
+  {
+    title: "FSSAI Registration",
+    description: "Essential food license registration for starting and running any food-related business in India.",
+    href: "/fssai-registration",
+    image: "/c1 (3).png",
   },
 ]

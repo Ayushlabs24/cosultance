@@ -9,6 +9,7 @@ const StatsSection = dynamic(() => import("@/components/stats-section"), { ssr: 
 const TestimonialsSection = dynamic(() => import("@/components/testimonials-section"), { ssr: true })
 const PricingSection = dynamic(() => import("@/components/pricing-section"), { ssr: true })
 const ContactSection = dynamic(() => import("@/components/contact-form"), { ssr: true })
+const FAQSection = dynamic(() => import("@/components/faq-section"), { ssr: true })
 
 export default function Home() {
   return (
@@ -16,11 +17,12 @@ export default function Home() {
       <HeroSectionNew />
       <UpdatesSection />
       <FeaturedServices />
-      <ServicesSection />
+      {/* <ServicesSection /> */}
       <StatsSection />
       <TestimonialsSection />
       <PricingSection />
       <ContactSection />
+      <FAQSection />
     </div>
   )
 }

@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 // import Header from "@/components/header"
+import TopBar from "@/components/top-bar"
 import GlassmorphicNavbar from "@/components/glassmorphic-navbar"
 import Footer from "@/components/footer"
 import FloatingButtons from "@/components/floating-buttons"
@@ -34,6 +35,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <ScrollToTop />
           {/* <Header /> */}
+          <TopBar />
           <GlassmorphicNavbar />
           <main className="w-full mx-auto">{children}</main>
           <Footer />

@@ -32,6 +32,7 @@ export default function Footer() {
                 <span className="sr-only">LinkedIn</span>
               </Link>
             </div>
+
           </div>
 
           {/* Services */}
@@ -77,13 +78,13 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Bharat Comply. All rights reserved.
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-xs text-gray-400">
-            <Link href="/terms" className="hover:text-white hover:underline transition-colors duration-200">
+            <Link href="/terms-of-service" className="hover:text-white hover:underline transition-colors duration-200">
               Terms of Service
             </Link>
-            <Link href="/privacy" className="hover:text-white hover:underline transition-colors duration-200">
+            <Link href="/privacy-policy" className="hover:text-white hover:underline transition-colors duration-200">
               Privacy Policy
             </Link>
-            <Link href="/refund" className="hover:text-white hover:underline transition-colors duration-200">
+            <Link href="/refund-policy" className="hover:text-white hover:underline transition-colors duration-200">
               Refund Policy
             </Link>
             <Link href="/sitemap" className="hover:text-white hover:underline transition-colors duration-200">

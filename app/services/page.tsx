@@ -1,189 +1,226 @@
-import Link from "next/link"
-import Image from "next/image"
-import { servicesData } from "@/lib/services-data"
-import { ArrowRight, Search } from "lucide-react"
-import { Input } from "@/components/ui/input"
+"use client";
 
-export const metadata = {
-  title: "Our Services | Business Services",
-  description:
-    "Explore our comprehensive range of business services including company registration, tax filing, compliance, and more.",
-}
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { 
+  ArrowRight, 
+  Rocket, 
+  ShieldCheck, 
+  FileText, 
+  Scale, 
+  TrendingUp, 
+  ClipboardCheck,
+  Building2,
+  FileBadge,
+  BadgeCheck,
+  CircleDollarSign,
+  Gavel
+} from "lucide-react";
 
-export default function ServicesPage({ searchParams }: { searchParams: { search?: string } }) {
-  // Filter services based on search query if provided
-  const searchQuery = searchParams.search || ""
-  const filteredServices = searchQuery
-    ? servicesData.filter(
-        (service) =>
-          service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          service.description.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
-    : servicesData
+const navigationData = [
+  {
+    category: "Business Startup",
+    items: [
+      { name: "Ideation to IPO", href: "/ideation-to-ipo", icon: Rocket, image: "/Busness/1.webp", description: "Complete guidance from concept to public listing" },
+    ]
+  },
+  {
+    category: "Seamless Registrations & Filings",
+    subgroups: [
+      {
+        title: "Registrations",
+        items: [
+          { name: "Pvt Ltd", href: "/pvt-ltd-registration", icon: Building2, image: "/Busness/2.webp" },
+          { name: "GST", href: "/gst-registration", icon: FileBadge, image: "/Busness/gst-registration.webp" },
+          { name: "FSSAI", href: "/fssai-registration", icon: BadgeCheck, image: "/Busness/3.webp" },
+          { name: "Trademark", href: "/trademark-registration", icon: ShieldCheck, image: "/trademark/2.webp" },
+        ]
+      },
+      {
+        title: "Filings",
+        items: [
+          { name: "GST Filing", href: "/gst-return-filing", icon: ClipboardCheck, image: "/Tax/3.webp" },
+          { name: "TDS Filing", href: "/tds-filing", icon: CircleDollarSign, image: "/Tax/2.webp" },
+          { name: "Income Tax Filing", href: "/income-tax-filing", icon: FileText, image: "/Tax/4 (2).webp" },
+          { name: "MCA Filing", href: "/mca-filing", icon: Scale, image: "/Tax/10 (2).webp" },
+        ]
+      }
+    ]
+  },
+  {
+    category: "Protect Your Business",
+    items: [
+      { name: "IPR", href: "/ipr-services", icon: ShieldCheck, image: "/trademark/1.webp" },
+      { name: "Copyright", href: "/copyright-registration", icon: FileText, image: "/trademark/9.webp" },
+      { name: "Patent", href: "/patent-registration", icon: FileBadge, image: "/trademark/6.webp" },
+      { name: "Trademark", href: "/trademark-registration", icon: ShieldCheck, image: "/trademark/2.webp" },
+    ]
+  },
+  {
+    category: "Business Valuation",
+    items: [
+      { name: "Valuation Services", href: "/valuation-services", icon: TrendingUp, image: "/Tax/11.webp" }
+    ]
+  },
+  {
+    category: "Legal Drafting",
+    items: [
+      { name: "Legal Documents", href: "/legal-drafting", icon: Gavel, image: "/Busness/legal-docs.webp" }
+    ]
+  }
+];
 
-  // Group services by category
-  const serviceCategories = [
-    {
-      title: "Business Registration",
-      services: filteredServices.filter(
-        (service) => service.slug.includes("registration") || service.slug === "business-registration",
-      ),
-    },
-    {
-      title: "Tax & Compliance",
-      services: filteredServices.filter(
-        (service) => service.slug.includes("tax") || service.slug.includes("compliance"),
-      ),
-    },
-    {
-      title: "Trademark & IP",
-      services: filteredServices.filter(
-        (service) =>
-          service.slug.includes("trademark") || service.slug.includes("copyright") || service.slug.includes("patent"),
-      ),
-    },
-    {
-      title: "Licenses",
-      services: filteredServices.filter((service) => service.slug.includes("license") || service.slug === "licenses"),
-    },
-    {
-      title: "Legal Services",
-      services: filteredServices.filter(
-        (service) =>
-          service.slug.includes("legal") || service.slug.includes("agreement") || service.slug.includes("notice"),
-      ),
-    },
-  ]
-
+export default function ServicesPage() {
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary to-primary/80 text-white py-16 md:py-24">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">Our Business Services</h1>
-          <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
-            Comprehensive business solutions to help you start, manage, and grow your business efficiently
+    <div className="relative min-h-screen w-full bg-[#0F172A] overflow-hidden">
+      {/* Background Image with Professional Overlay */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/BackgroundImage.png"
+          alt="Services Background"
+          fill
+          priority
+          className="object-cover opacity-30"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0F172A] mix-blend-multiply"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F172A] via-transparent to-[#0F172A]"></div>
+      </div>
+
+      <div className="relative z-10 container mx-auto px-6 pt-32 pb-24 md:pt-40 md:pb-32">
+        {/* Header Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl mx-auto text-center mb-20"
+        >
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+            Comprehensive <span className="text-[#0EA5E9]">Business Solutions</span>
+          </h1>
+          <p className="text-lg md:text-xl text-gray-300 font-medium max-w-2xl mx-auto">
+            Empowering your entrepreneurial journey with expert guidance and seamless compliance services.
           </p>
+        </motion.div>
 
-          {/* Search Bar */}
-          <div className="max-w-xl mx-auto relative">
-            <form action="/services" method="get">
-              <div className="relative">
-                <Input
-                  type="text"
-                  name="search"
-                  defaultValue={searchQuery}
-                  placeholder="Search for services..."
-                  className="w-full py-3 pl-12 pr-4 text-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent"
-                />
-                <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
-                  <Search className="w-5 h-5 text-gray-500" />
-                </div>
-                <button
-                  type="submit"
-                  className="absolute inset-y-0 right-0 flex items-center px-4 font-medium text-white bg-primary hover:bg-primary/90 rounded-r-full focus:outline-none focus:ring-2 focus:ring-white"
-                >
-                  Search
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
+        <div className="space-y-24">
+          {navigationData.map((category, catIdx) => (
+            <div key={category.category} className="space-y-10">
+              <motion.div
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.4 }}
+                className="flex items-center gap-4"
+              >
+                <h2 className="text-2xl md:text-3xl font-bold text-white tracking-wide uppercase">
+                  {category.category}
+                </h2>
+                <div className="h-px flex-1 bg-gradient-to-r from-[#0EA5E9]/50 to-transparent"></div>
+              </motion.div>
 
-      {/* Search Results */}
-      {searchQuery && (
-        <section className="py-12 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold mb-8">
-              Search Results for "{searchQuery}" ({filteredServices.length} results)
-            </h2>
-
-            {filteredServices.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-lg text-gray-600 mb-4">No services found matching your search.</p>
-                <Link href="/services" className="text-primary hover:underline">
-                  View all services
-                </Link>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredServices.map((service) => (
-                  <Link
-                    key={service.slug}
-                    href={`/service/${service.slug}`}
-                    className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow group"
-                  >
-                    <div className="relative h-48">
-                      <Image
-                        src={service.bannerImage || "/placeholder.svg"}
-                        alt={service.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="p-6">
-                      <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors">
-                        {service.title}
+              {category.subgroups ? (
+                <div className="space-y-16">
+                  {category.subgroups.map((subgroup) => (
+                    <div key={subgroup.title} className="space-y-6">
+                      <h3 className="text-lg font-bold text-gray-400 uppercase tracking-widest pl-2">
+                        {subgroup.title}
                       </h3>
-                      <p className="text-gray-600 text-sm mb-4 line-clamp-2">{service.description}</p>
-                      <div className="flex items-center text-primary font-medium text-sm">
-                        Learn More
-                        <ArrowRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        {subgroup.items.map((item, itemIdx) => (
+                          <ServiceCard key={item.name} item={item} index={itemIdx} />
+                        ))}
                       </div>
                     </div>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
-      )}
-
-      {/* Services by Category */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          {serviceCategories.map(
-            (category, index) =>
-              category.services.length > 0 && (
-                <div key={index} className="mb-16 last:mb-0">
-                  <h2 className="text-2xl md:text-3xl font-bold mb-8 pb-2 border-b border-gray-200">
-                    {category.title}
-                  </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {category.services.map((service) => (
-                      <Link
-                        key={service.slug}
-                        href={`/service/${service.slug}`}
-                        className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow group"
-                      >
-                        <div className="relative h-48">
-                          <Image
-                            src={service.bannerImage || "/placeholder.svg"}
-                            alt={service.title}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                        <div className="p-6">
-                          <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors">
-                            {service.title}
-                          </h3>
-                          <p className="text-gray-600 text-sm mb-4 line-clamp-2">{service.description}</p>
-                          <div className="flex items-center text-primary font-medium text-sm">
-                            Learn More
-                            <ArrowRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                          </div>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
+                  ))}
                 </div>
-              ),
-          )}
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {category.items?.map((item, itemIdx) => (
+                    <ServiceCard key={item.name} item={item} index={itemIdx} />
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
-      </section>
+
+        {/* CTA Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-32 p-12 md:p-16 rounded-[3rem] bg-gradient-to-br from-[#0EA5E9]/20 to-transparent border border-white/10 text-center relative overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-white/5 backdrop-blur-3xl -z-10"></div>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Ready to scale your business?</h2>
+          <p className="text-gray-300 text-lg mb-10 max-w-xl mx-auto uppercase tracking-widest font-semibold">
+            Get expert consultation tailored to your needs
+          </p>
+          <button 
+            onClick={() => window.dispatchEvent(new Event('open-contact-form'))}
+            className="px-10 py-5 bg-white text-black rounded-full font-bold text-lg hover:bg-gray-200 transition-all shadow-xl hover:shadow-[#0EA5E9]/20"
+          >
+            Schedule a Free Consultation
+          </button>
+        </motion.div>
+      </div>
     </div>
-  )
+  );
 }
 
+function ServiceCard({ item, index }: { item: any; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-20px" }}
+      transition={{ 
+        duration: 0.3,
+        delay: (index % 4) * 0.04,
+        ease: "easeOut"
+      }}
+      className="h-full"
+    >
+      <Link href={item.href} className="block h-full group">
+        <div className="h-full bg-white/[0.03] border border-white/10 rounded-[2rem] overflow-hidden hover:bg-white/[0.08] transition-all duration-200 shadow-2xl flex flex-col">
+          {/* Image Container */}
+          <div className="relative h-44 w-full overflow-hidden bg-gray-900/50">
+            {item.image && (
+              <Image
+                src={item.image}
+                alt={item.name}
+                fill
+                className="object-cover opacity-80 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                quality={45} // Drastically reduced for performance
+              />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent"></div>
+            
+            <div className="absolute bottom-4 left-6 w-10 h-10 bg-[#0EA5E9] rounded-lg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200">
+              <item.icon className="w-5 h-5 text-white" />
+            </div>
+          </div>
+          
+          <div className="p-6 flex-1 flex flex-col">
+            <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#0EA5E9] transition-colors uppercase tracking-tight line-clamp-1">
+              {item.name}
+            </h3>
+            
+            {item.description && (
+              <p className="text-gray-400 text-[11px] leading-relaxed mb-4 line-clamp-2">
+                {item.description}
+              </p>
+            )}
+            
+            <div className="mt-auto flex items-center text-[10px] font-bold text-[#0EA5E9] tracking-widest">
+              EXPLORE
+              <ArrowRight className="ml-2 w-3 h-3 transition-transform duration-200 group-hover:translate-x-1" />
+            </div>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
+  );
+}

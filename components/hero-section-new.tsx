@@ -170,10 +170,14 @@ export default function HeroSectionNew() {
             alt="Hero Background"
             fill
             priority
-            className="object-cover"
+            className="object-cover scale-105"
           />
+          
+          {/* Growth/Blue Overlay: Pushes background back and adds professional tone */}
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900/60 via-blue-900/40 to-slate-900/60 z-[1]"></div>
+
           {/* Bottom Fade to blend with content/footer */}
-          <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent"></div>
+          <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent z-[2]"></div>
         </div>
 
         {/* Content Container */}
