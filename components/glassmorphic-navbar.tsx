@@ -91,6 +91,14 @@ const navigationData: NavItem[] = [
         ]
       }
     ]
+  },
+  {
+    name: "About Us",
+    href: "/about-us",
+  },
+  {
+    name: "Contact Us",
+    href: "/contact-us",
   }
 ];
 
@@ -226,38 +234,36 @@ export default function GlassmorphicNavbar() {
         </button>
       </div>
 
+
+
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            transition={{ duration: 0.3, type: "spring", stiffness: 200, damping: 25 }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "100vh" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
             className="
-              absolute top-full right-0 left-0
+              fixed top-[80px] left-0 right-0 bottom-0
               bg-[#121212]/95 backdrop-blur-xl
-              rounded-3xl
-              border border-white/10
-              overflow-hidden
-              shadow-2xl
-              flex flex-col
+              z-[9998]
+              overflow-y-auto max-h-[calc(100vh-80px)]
               lg:hidden
-              w-full
             "
           >
-            <div className="flex flex-col p-4 max-h-[80vh] overflow-y-auto">
+            <div className="flex flex-col p-6 pb-24">
                 {navigationData.map((item) => (
                     <div key={item.name} className="border-b border-white/10 last:border-0">
                         {item.children ? (
                             <>
                                 <button
                                     onClick={() => toggleMobileExpand(item.name)}
-                                    className="w-full flex items-center justify-between py-3 text-white text-base font-medium"
+                                    className="w-full flex items-center justify-between py-4 text-white text-lg font-medium"
                                 >
                                     {item.name}
                                     <ChevronDown 
-                                        size={18} 
+                                        size={20} 
                                         className={`transition-transform duration-300 ${mobileExpanded === item.name ? "rotate-180" : ""}`}
                                     />
                                 </button>
@@ -268,13 +274,13 @@ export default function GlassmorphicNavbar() {
                                             initial={{ height: 0, opacity: 0 }}
                                             animate={{ height: "auto", opacity: 1 }}
                                             exit={{ height: 0, opacity: 0 }}
-                                            className="overflow-hidden bg-white/5 rounded-xl mb-3"
+                                            className="overflow-hidden bg-white/5 rounded-xl mb-4"
                                         >
-                                            <div className="p-3 flex flex-col gap-4">
+                                            <div className="p-4 flex flex-col gap-4">
                                                 {item.children?.map((group, idx) => (
-                                                    <div key={idx} className="flex flex-col gap-2">
+                                                    <div key={idx} className="flex flex-col gap-3">
                                                          {group.title && (
-                                                            <h5 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-2">
+                                                            <h5 className="text-xs font-bold text-gray-400 uppercase tracking-widest pl-2">
                                                                 {group.title}
                                                             </h5>
                                                         )}
@@ -282,10 +288,11 @@ export default function GlassmorphicNavbar() {
                                                             <Link 
                                                                 key={subItem.name} 
                                                                 href={subItem.href || '#'}
-                                                                className="flex items-center gap-2 text-gray-200 p-2 hover:bg-white/10 rounded-lg transition-colors"
+                                                                className="flex items-center gap-3 text-gray-200 p-3 hover:bg-white/10 rounded-lg transition-colors"
+                                                                onClick={() => setIsOpen(false)}
                                                             >
-                                                                <div className="w-1 h-1 rounded-full bg-[#0EA5E9]"></div>
-                                                                <span className="text-sm">{subItem.name}</span>
+                                                                <div className="w-1.5 h-1.5 rounded-full bg-[#0EA5E9]"></div>
+                                                                <span className="text-base">{subItem.name}</span>
                                                             </Link>
                                                         ))}
                                                     </div>
@@ -298,7 +305,7 @@ export default function GlassmorphicNavbar() {
                         ) : (
                             <Link 
                                 href={item.href || '#'}
-                                className="w-full flex items-center justify-between py-3 text-white text-base font-medium hover:text-[#0EA5E9] transition-colors"
+                                className="w-full flex items-center justify-between py-4 text-white text-lg font-medium hover:text-[#0EA5E9] transition-colors"
                                 onClick={() => setIsOpen(false)}
                             >
                                 {item.name}

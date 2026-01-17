@@ -15,6 +15,23 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'blog.n8ndevelopers.com', // Replace with your actual WordPress domain
+        pathname: '/wp-content/uploads/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'secure.gravatar.com', // For WordPress author avatars
+        pathname: '/avatar/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com', // For mock data/placeholders
+        pathname: '/**',
+      },
+    ],
   },
   experimental: {
     webpackBuildWorker: true,

@@ -10,18 +10,21 @@ const TestimonialsSection = dynamic(() => import("@/components/testimonials-sect
 const PricingSection = dynamic(() => import("@/components/pricing-section"), { ssr: true })
 const ContactSection = dynamic(() => import("@/components/contact-form"), { ssr: true })
 const FAQSection = dynamic(() => import("@/components/faq-section"), { ssr: true })
+const RecentBlogs = dynamic(() => import("@/components/recent-blogs"), { ssr: true })
+
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       <HeroSectionNew />
       <UpdatesSection />
       <FeaturedServices />
       {/* <ServicesSection /> */}
       <StatsSection />
       <TestimonialsSection />
-      <PricingSection />
+      {/* <PricingSection /> */}
       <ContactSection />
+      <RecentBlogs />
       <FAQSection />
     </div>
   )

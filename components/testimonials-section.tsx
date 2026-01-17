@@ -40,7 +40,7 @@ export default function TestimonialsSection() {
   const t = testimonials[current]
 
   return (
-    <section className="w-full flex justify-center bg-white text-zinc-900 font-[Manrope] py-16 px-6 relative overflow-visible">
+    <section className="w-full flex justify-center bg-white text-zinc-900 font-[Manrope] py-16 px-4 md:px-6 relative overflow-hidden">
       <div
         className="relative max-w-[90rem] w-full"
         style={{ height: "auto", opacity: 1 }}>
@@ -67,49 +67,27 @@ export default function TestimonialsSection() {
         
         <div className="flex flex-col lg:flex-row justify-between items-start lg:mt-[6.25rem] gap-8 lg:gap-0 relative z-10">
          
-          <div
-            className="bg-gray-50 rounded-[2rem] p-8 relative order-2 lg:order-1 border border-zinc-100 shadow-sm"
-            style={{
-              width: "100%",
-              maxWidth: "36.125rem",
-              height: "22.5rem",
-            }}>
             <div
-              className="flex flex-col"
-              style={{ width: "30rem", height: "10rem", gap: "0.5rem" }}>
+              className="bg-gray-50 rounded-[2rem] p-6 lg:p-8 relative order-2 lg:order-1 border border-zinc-100 shadow-sm w-full lg:max-w-[36.125rem] h-auto lg:h-[22.5rem]"
+              >
               <div
-                className="text-[#0EA5E9] opacity-50"
-                style={{
-                  width: "2rem",
-                  height: "2rem",
-                  fontSize: "4rem",
-                  lineHeight: "2rem",
-                  marginBottom: "1rem"
-                }}>
-                “
+                className="flex flex-col gap-2 w-full h-auto"
+               >
+                <div
+                  className="text-[#0EA5E9] opacity-50 text-[4rem] leading-[2rem] mb-4"
+                  >
+                  “
+                </div>
+                <p
+                  className="text-zinc-800 font-semibold text-lg lg:text-[1.625rem] leading-relaxed lg:leading-[2.125rem] tracking-tight w-full"
+                 >
+                  {t.quote}
+                </p>
               </div>
-              <p
-                className="text-zinc-800"
-                style={{
-                  width: "30rem",
-                  height: "7.5rem",
-                  fontWeight: 600,
-                  fontSize: "1.625rem",
-                  lineHeight: "2.125rem",
-                  letterSpacing: "-0.03em",
-                }}>
-                {t.quote}
-              </p>
-            </div>
 
             <div
-              className="absolute flex items-center gap-3"
-              style={{
-                width: "15.0625rem",
-                height: "3.625rem",
-                top: "16.875rem",
-                left: "2.75rem",
-              }}>
+              className="mt-8 lg:absolute lg:mt-0 flex items-center gap-3 lg:top-[16.875rem] lg:left-[2.75rem]"
+              >
               <img
                 src={t.image}
                 alt={t.name}
@@ -123,13 +101,11 @@ export default function TestimonialsSection() {
           </div>
 
         
+
+
           <div
-            className="rounded-[2rem] overflow-hidden border border-zinc-100 bg-gray-50 order-1 lg:order-2 shadow-lg"
-            style={{
-              width: "100%",
-              maxWidth: "42.875rem",
-              height: "22.5rem",
-            }}>
+            className="rounded-[2rem] overflow-hidden border border-zinc-100 bg-gray-50 order-1 lg:order-2 shadow-lg w-full lg:max-w-[42.875rem] h-[15rem] md:h-[20rem] lg:h-[22.5rem]"
+           >
             <LazyYouTube
               key={current}
               videoId={t.videoId}
@@ -138,6 +114,7 @@ export default function TestimonialsSection() {
             />
           </div>
         </div>
+
 
        
         <div className="flex flex-col lg:flex-row justify-between lg:items-center mt-10 relative z-30">
@@ -188,46 +165,6 @@ export default function TestimonialsSection() {
           </div>
         </div>
       </div>
-      <style jsx>{`
-        @media (max-width: 1024px) {
-          section {
-            padding: 4rem 1rem;
-          }
-          /* Make sure buttons and dots remain visible */
-          div[style*="left: 78rem"],
-          div[style*="left: 7.25rem"] {
-            position: static !important;
-            margin: 1rem auto 0 auto;
-            justify-content: center;
-            display: flex;
-            z-index: 50;
-          }
-          .flex-col {
-            flex-direction: column;
-          }
-        }
-
-        @media (max-width: 768px) {
-          h2 {
-            font-size: 18px;
-            text-align: center;
-            font-weight: 500 !important;
-          }
-          iframe {
-            height: 240px !important;
-          }
-          p {
-            font-size: 18px !important;
-            line-height: 26px !important;
-          }
-          section {
-            overflow: visible !important;
-          }
-          button {
-            z-index: 50 !important;
-          }
-        }
-      `}</style>
     </section>
   )
 }
